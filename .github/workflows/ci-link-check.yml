@@ -11,11 +11,10 @@ jobs:
   lychee:
     name: lychee link checker
     runs-on: ubuntu-latest
-    # 允许失败 (因外部 stats 服务偶发抖动), 但通过 monitor-stats.yml 监控告警
     continue-on-error: true
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Lychee Link Checker
         uses: lycheeverse/lychee-action@v2
         with:

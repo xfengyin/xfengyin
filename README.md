@@ -4,6 +4,10 @@
 
 专注 AI 应用、全栈工程与硬件结合的端到端实践。喜欢把有趣的想法变成可用的产品！
 
+<p align="left">
+  <img src="https://komarev.com/ghpvc/?username=xfengyin&color=4A4E50&style=flat-square&label=PROFILE+VIEWS" alt="Profile Views" />
+</p>
+
 ---
 
 ## <span aria-hidden="true">🛠</span> 技术栈
@@ -22,7 +26,7 @@
 **Tools & Platforms**
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=Linux&logoColor=black)
-![OrangePi](https://img.shields.io/badge/OrangePi-F9A602?style=flat-square&logo=Linux&logoColor=black)
+<img src="assets/badges/orangepi.svg" alt="OrangePi: Linux" />
 
 ---
 
@@ -57,8 +61,7 @@
 ## <span aria-hidden="true">📈</span> GitHub Stats
 
 <p align="left">
-  <img height="150" alt="xfengyin 的 GitHub 统计" src="https://github-readme-stats.vercel.app/api?username=xfengyin&show_icons=true&theme=radical" />
-  <img height="150" alt="xfengyin 常用语言分布" src="https://github-readme-stats.vercel.app/api/top-langs/?username=xfengyin&layout=compact&theme=radical" />
+  <img height="150" alt="xfengyin 的 GitHub 连续贡献统计" src="https://github-readme-streak-stats.demolab.com/?user=xfengyin&theme=radical&hide_border=true" />
 </p>
 
 ---

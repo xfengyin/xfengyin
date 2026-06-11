@@ -1,0 +1,4 @@
+# CODEOWNERS
+# 任何文件变更默认要求 @xfengyin review
+# 后续可按目录细分 (例如: data/ 变更需产品 review, .github/ 变更需 SRE review)
+* @xfengyin

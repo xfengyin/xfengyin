@@ -1,10 +1,8 @@
 name: monitor-stats
 
 on:
-  # 每日 UTC 01:00 体检外部图像源
   schedule:
     - cron: "0 1 * * *"
-  # 支持手动触发
   workflow_dispatch:
 
 permissions:
@@ -17,8 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
+        uses: actions/checkout@v6
       - name: Probe external image sources
         id: probe
         env:
@@ -29,13 +26,12 @@ jobs:
           URLS=(
             "https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=white"
             "https://img.shields.io/badge/Website-个人主页-4A4E50?style=flat-square"
-            "https://github-readme-stats.vercel.app/api?username=xfengyin&show_icons=true&theme=radical"
-            "https://github-readme-stats.vercel.app/api/top-langs/?username=xfengyin&layout=compact&theme=radical"
+            "https://github-readme-streak-stats.demolab.com/?user=xfengyin&theme=radical&hide_border=true"
+            "https://komarev.com/ghpvc/?username=xfengyin&color=4A4E50&style=flat-square&label=PROFILE+VIEWS"
           )
 
           FAILED=()
           for url in "${URLS[@]}"; do
-            # shields.io 与 stats 端返回 SVG; 用 -L 跟随重定向
             status=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 15 "$url" || echo "000")
             if [[ "$status" != "200" ]]; then
               echo "FAIL $status $url"
@@ -57,17 +53,16 @@ jobs:
               echo ""
               echo "**处置**:"
               echo ""
-              echo "1. 若为 \`vercel.app\` 端长期不可用: 迁移至自托管 Action (见 ARCHITECTURE.md)"
-              echo "2. 若为 shields.io 单次失败: 重试;若持续失败则调整 badge URL"
-              echo "3. 修复后请手动关闭本 issue"
+              echo "1. 重试;若持续失败则替换图像源"
+              echo "2. 修复后请手动关闭本 issue"
             } >> failure.txt
             exit 1
           fi
           echo "All external image sources are healthy."
 
       - name: Open issue on failure
-        if: failure() && steps.probe.outputs.failed != ''
-        uses: actions/github-script@v7
+        if: failure()
+        uses: actions/github-script@v9
         with:
           script: |
             const fs = require('fs');

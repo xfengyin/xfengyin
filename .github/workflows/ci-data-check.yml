@@ -8,16 +8,37 @@ on:
 
 jobs:
   data-consistency:
-    name: data/*.yml vs README.md
+    name: data/*.yml vs README.md + schema
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - name: Install pyyaml
-        run: pip install pyyaml
-      - name: Run consistency check
+      - name: Install dependencies
+        run: pip install pyyaml jsonschema
+      - name: Validate data/*.yml against JSON Schema
+        run: |
+          python -c "
+          import json, yaml, sys
+          import jsonschema
+          schemas = {
+              'data/projects.yml': 'assets/schema/projects.schema.json',
+              'data/tech_stack.yml': 'assets/schema/tech_stack.schema.json',
+          }
+          ok = True
+          for yml, schema_path in schemas.items():
+              schema = json.load(open(schema_path))
+              data = yaml.safe_load(open(yml))
+              try:
+                  jsonschema.validate(data, schema)
+                  print(f'OK  {yml} conforms to {schema_path}')
+              except jsonschema.ValidationError as e:
+                  print(f'FAIL {yml}: {e.message}')
+                  ok = False
+          sys.exit(0 if ok else 1)
+          "
+      - name: Cross-check data vs README
         run: python scripts/check_data_consistency.py

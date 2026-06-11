@@ -40,9 +40,27 @@ def extract_readme_projects() -> set[str]:
 
 
 def extract_readme_tech_badges() -> set[str]:
-    """从 README 提取所有 shields.io 徽章 URL (作为技术栈特征集)。"""
+    """从 README 提取所有技术徽章的"特征名"。
+
+    支持两种来源:
+    - shields.io 徽章: 从 URL 段提取 (如 OrangePi-F9A602 -> OrangePi)
+    - 本地自托管 SVG: 从 <img alt="..."> 第一段提取
+    """
     text = README.read_text(encoding="utf-8")
-    return set(re.findall(r"https://img\.shields\.io/badge/([A-Za-z0-9.+_]+)-", text))
+    names: set[str] = set()
+
+    # 1) shields.io: badge/<Name>-<color>
+    for token in re.findall(r"https://img\.shields\.io/badge/([A-Za-z0-9.+_]+)-[0-9A-Fa-f]+", text):
+        names.add(token)
+
+    # 2) 本地 SVG: alt="Name: ..." 或 alt="Name"
+    for alt in re.findall(r'alt="([^"]+)"', text):
+        # 取冒号前的首段作为特征名
+        first = alt.split(":")[0].strip()
+        if first and not first.lower().startswith(("xfengyin", "profile", "github", "website")):
+            names.add(first)
+
+    return names
 
 
 def main() -> int:
