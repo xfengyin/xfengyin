@@ -1,0 +1,81 @@
+# 精选项目数据源
+# 同步维护 README.md 中"精选项目"区块
+# 字段说明:
+#   name: 项目名
+#   category: ai-agent | fullstack | tooling | hardware
+#   desc: 一句话描述
+#   repo: GitHub 仓库 (owner/name 形式)
+#   featured: 是否在 README 中展示
+
+projects:
+  - name: kongming-agent
+    category: ai-agent
+    desc: 孔明军师 AI 系统,融合三国智慧与现代 Agent 架构 (LLM + RAG + Tool Use)
+    repo: xfengyin/kongming-agent
+    featured: true
+
+  - name: mini-agent-go
+    category: ai-agent
+    desc: 纯 Go 实现的轻量级 AI Agent 框架 (< 1.5k LOC, 零依赖)
+    repo: xfengyin/mini-agent-go
+    featured: true
+
+  - name: youth-weekly
+    category: ai-agent
+    desc: Z 世代内容聚合平台 (科技 / 人文 / 动漫 / 游戏)
+    repo: xfengyin/youth-weekly
+    featured: true
+
+  - name: zhihu-salt-novel-downloader
+    category: fullstack
+    desc: 知乎盐选小说下载器,支持 CLI / GUI 双模式
+    repo: xfengyin/zhihu-salt-novel-downloader
+    featured: true
+
+  - name: signage-dashboard
+    category: fullstack
+    desc: 前后端分离的数据可视化系统
+    repo: xfengyin/signage-dashboard
+    featured: true
+
+  - name: MusicPlayer-Pro
+    category: fullstack
+    desc: 跨平台音乐播放器 (Vue3 + Go + Electron)
+    repo: xfengyin/MusicPlayer-Pro
+    featured: true
+
+  - name: TV
+    category: tooling
+    desc: TVBox / 影视仓配置文件,自动更新直播源
+    repo: xfengyin/TV
+    featured: true
+
+  - name: zen-env
+    category: tooling
+    desc: 下一代 Python 环境管理器,支持意图驱动配置
+    repo: xfengyin/zen-env
+    featured: true
+
+  - name: qinglong-rs
+    category: tooling
+    desc: 轻量级定时任务管理面板 Rust 重构版
+    repo: xfengyin/qinglong-rs
+    featured: true
+
+  - name: MimiClaw-OrangePi
+    category: hardware
+    desc: 香橙派 AI 助手
+    repo: xfengyin/MimiClaw-OrangePi
+    featured: true
+
+  - name: UHTF
+    category: hardware
+    desc: 通用硬件测试框架
+    repo: xfengyin/UHTF
+    featured: true
+
+  - name: jciyuan-spider
+    category: hardware
+    desc: Go Web 爬虫
+    repo: xfengyin/jciyuan-spider
+    featured: true

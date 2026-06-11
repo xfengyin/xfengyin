@@ -1,0 +1,25 @@
+name: ci-link-check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # 每日 UTC 00:00 运行，断链自动开 issue
+    - cron: "0 0 * * *"
+
+jobs:
+  lychee:
+    name: lychee link checker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Lychee Link Checker
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --config .lycheecrc --no-progress **/*.md **/*.yml
+          fail: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

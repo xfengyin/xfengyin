@@ -1,0 +1,58 @@
+# 技术栈数据源
+# 同步维护 README.md 中"技术栈"区块
+# 字段说明:
+#   name: 技术名
+#   category: backend | frontend | tooling
+#   badge: shields.io URL
+#   alt: alt 文本 (无障碍)
+
+tech_stack:
+  - name: Python
+    category: backend
+    badge: https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=white
+    alt: Python
+
+  - name: Go
+    category: backend
+    badge: https://img.shields.io/badge/Go-00ADD8?style=flat-square&logo=Go&logoColor=white
+    alt: Go
+
+  - name: Rust
+    category: backend
+    badge: https://img.shields.io/badge/Rust-000000?style=flat-square&logo=Rust&logoColor=white
+    alt: Rust
+
+  - name: TypeScript
+    category: backend
+    badge: https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white
+    alt: TypeScript
+
+  - name: Vue.js
+    category: frontend
+    badge: https://img.shields.io/badge/Vue.js-4FC08D?style=flat-square&logo=Vue.js&logoColor=white
+    alt: Vue.js
+
+  - name: Electron
+    category: frontend
+    badge: https://img.shields.io/badge/Electron-47848F?style=flat-square&logo=Electron&logoColor=white
+    alt: Electron
+
+  - name: Swift
+    category: frontend
+    badge: https://img.shields.io/badge/Swift-FA7343?style=flat-square&logo=Swift&logoColor=white
+    alt: Swift
+
+  - name: Docker
+    category: tooling
+    badge: https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white
+    alt: Docker
+
+  - name: Linux
+    category: tooling
+    badge: https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=Linux&logoColor=black
+    alt: Linux
+
+  - name: OrangePi
+    category: tooling
+    badge: https://img.shields.io/badge/OrangePi-F9A602?style=flat-square&logo=Linux&logoColor=black
+    alt: OrangePi

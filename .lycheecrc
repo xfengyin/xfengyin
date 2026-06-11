@@ -1,0 +1,17 @@
+{
+  "maxRetries": 3,
+  "maxConcurrency": 4,
+  "timeout": 30,
+  "retryWaitTime": 2,
+  "accept": [200, 203, 206, 301, 302, 304, 307, 308, 403, 405, 410],
+  "exclude": [
+    "file://",
+    "localhost",
+    "127.0.0.1",
+    "0.0.0.0",
+    "https://img.shields.io/badge/.*",
+    "https://github-readme-stats.vercel.app/.*"
+  ],
+  "excludeLinkLocal": true,
+  "excludeLoopback": true
+}

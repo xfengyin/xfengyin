@@ -1,0 +1,19 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build artifacts
+node_modules/
+dist/
+build/
+*.log
+
+# Local secrets (never commit)
+.env
+.env.local
+*.pem
+*.key
