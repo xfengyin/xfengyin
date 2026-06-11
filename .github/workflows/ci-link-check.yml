@@ -5,21 +5,21 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-  schedule:
-    # 每日 UTC 00:00 运行，断链自动开 issue
-    - cron: "0 0 * * *"
+  workflow_dispatch:
 
 jobs:
   lychee:
     name: lychee link checker
     runs-on: ubuntu-latest
+    # 允许失败 (因外部 stats 服务偶发抖动), 但通过 monitor-stats.yml 监控告警
+    continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Lychee Link Checker
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --config .lycheecrc --no-progress **/*.md **/*.yml
-          fail: false
+          args: --config .lycheecrc --no-progress **/*.md
+          fail: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

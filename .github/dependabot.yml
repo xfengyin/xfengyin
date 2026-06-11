@@ -1,0 +1,19 @@
+# Dependabot
+# 自动检测 GitHub Actions 版本更新, 提升供应链安全
+# Profile 仓库仅需关注 actions, 暂不启用 npm/pip/docker/pip 等生态 (无运行时依赖)
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    commit-message:
+      prefix: "ci"
+    labels:
+      - "dependencies"
+      - "ci"
+    # 限制 PR 数量避免噪音
+    open-pull-requests-limit: 5
+    # 自动 rebase 减少维护负担
+    rebase-strategy: "auto"

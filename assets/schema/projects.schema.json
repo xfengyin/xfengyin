@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/xfengyin/xfengyin/schemas/projects.schema.json",
+  "title": "projects.yml",
+  "type": "object",
+  "required": ["projects"],
+  "properties": {
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "category", "desc", "repo"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "category": {
+            "type": "string",
+            "enum": ["ai-agent", "fullstack", "tooling", "hardware"]
+          },
+          "desc": {"type": "string", "minLength": 1, "maxLength": 200},
+          "repo": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9._-]+/[a-zA-Z0-9._-]+$"
+          },
+          "featured": {"type": "boolean"}
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

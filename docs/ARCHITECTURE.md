@@ -68,7 +68,38 @@ Profile 仓库本质是"个人品牌门面",**展示形态** > **数据完整性
 | `ci-lint.yml` | `markdownlint-cli2` | push / PR | 阻断合并 |
 | `ci-link-check.yml` | `lychee` | push / PR / cron | 警告 + 自动 issue |
 
-> 故意不引入 `dependabot.yml` 等过度配置 — Profile 仓库变更频率低,人肉管理足够。
+> dependabot.yml 已配置为周轮询 (见下方 L3)，仍不引入 npm/pip/docker 等生态 (无运行时依赖)。
+
+## 已知限制 (Known Limitations)
+
+> 本节明确记录"已知但故意未修复"的问题，避免读者误判项目质量。
+
+### L1. OrangePi 徽章 logo 与 alt 错配
+
+- **位置**: `README.md` Tools & Platforms 分组中 OrangePi 徽章
+- **现状**: `logo=Linux` (因为 shields.io simpleicons 无 OrangePi 官方 logo), `alt=OrangePi`
+- **取舍**: shields.io 简图库覆盖硬件品牌有限，OrangePi 等小众硬件无对应 logo
+- **备选方案**:
+  - 自托管 SVG 徽章 (复杂度 ↑)
+  - 使用通用 `chip` / `hardware` 类 icon (语义 ↓)
+  - 维持现状 (推荐) — alt 已准确表达品牌，logo 仅为视觉装饰
+
+### L2. `github-readme-stats.vercel.app` 单点依赖
+
+- **现状**: 继续使用上游服务，未替换
+- **风险**: 审查曾标记"半弃用"
+- **缓解**:
+  - `ci-link-check.yml` 每次 PR 检测
+  - `monitor-stats.yml` 每日 cron + 失败自动开 issue
+  - ARCHITECTURE.md 留有"自托管迁移"路径
+- **触发替换条件**: monitor-stats 连续 3 天开 issue 后评估
+
+### L3. Action 版本未锁 SHA
+
+- **现状**: 全部使用浮动 tag (`@v4`, `@v19`, `@v2`)
+- **风险**: 上游可被供应链攻击
+- **缓解**: `.github/dependabot.yml` 周一自动检测 + 提 PR；人工 review 合入
+- **进一步加固路径**: dependabot 启用后，批量 PR 将 action 锁到 SHA
 
 ## 扩展指南
 

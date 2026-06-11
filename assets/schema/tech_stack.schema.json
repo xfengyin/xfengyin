@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/xfengyin/xfengyin/schemas/tech_stack.schema.json",
+  "title": "tech_stack.yml",
+  "type": "object",
+  "required": ["tech_stack"],
+  "properties": {
+    "tech_stack": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "category", "badge", "alt"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "category": {
+            "type": "string",
+            "enum": ["backend", "frontend", "tooling"]
+          },
+          "badge": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://img\\.shields\\.io/.*"
+          },
+          "alt": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
