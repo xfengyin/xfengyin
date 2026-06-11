@@ -37,10 +37,12 @@ xfengyin/
 │   │   └── orangepi.svg               # 本地化 OrangePi 徽章
 │   └── schema/                        # JSON Schema 契约
 │       ├── projects.schema.json
-│       └── tech_stack.schema.json
+│       ├── tech_stack.schema.json
+│       └── blog.schema.json
 ├── data/                              # 单一事实源
 │   ├── projects.yml                   # 精选项目
-│   └── tech_stack.yml                 # 技术栈
+│   ├── tech_stack.yml                 # 技术栈
+│   └── blog.yml                       # 最新博客文章
 ├── docs/
 │   └── ARCHITECTURE.md                # 本文件
 ├── scripts/
@@ -153,6 +155,8 @@ Profile 仓库本质是"个人品牌门面",**展示形态** > **数据完整性
 
 | 日期 | 变更 |
 |------|------|
+| 2026-06-11 (v4.1.0) | 新增 blog.yml + schema + 校验；dependabot-auto-merge fetch-metadata 升级到 v3.1.0 (SHA 锁定) |
+| 2026-06-11 (v4.0.0) | 关闭 6 个跟踪 issue: L3 SHA 锁定 + 5 个 P2/P3 |
 | 2026-06-11 (v3) | 弃用 vercel.app / 迁移 streak & view / 自托管 OrangePi SVG / 加 schema 校验 / 加 auto-merge / 加 CODEOWNERS & FUNDING & CoC |
 | 2026-06-11 (v2) | 补 P0/P1: monitor-stats / data-check / dependabot / aria-hidden / 个人 slogan |
 | 2026-06-11 (v1) | 初版: 全量审查后建立工程化基础 (LICENSE / SECURITY / 模板 / CI) |

@@ -1,0 +1,23 @@
+# 博客文章数据源
+# 同步维护 README.md 中"最新博客文章"区块
+# 字段说明:
+#   title: 文章标题
+#   url: 文章链接 (站内或外部)
+#   date: 发布日期 (ISO 8601 字符串, 避免 YAML 自动转 date 对象)
+#   platform: 平台标识 (github-pages | juejin | zhihu | medium | personal)
+
+posts:
+  - title: "Profile 仓库的全量工程化实践"
+    url: https://github.com/xfengyin/xfengyin
+    date: "2026-06-11"
+    platform: github-pages
+
+  - title: "kongming-agent: 孔明军师 AI 系统架构演进"
+    url: https://github.com/xfengyin/kongming-agent
+    date: "2026-06-01"
+    platform: github-pages
+
+  - title: "mini-agent-go: 1000 行 Go 写一个 Agent 框架"
+    url: https://github.com/xfengyin/mini-agent-go
+    date: "2026-05-15"
+    platform: github-pages

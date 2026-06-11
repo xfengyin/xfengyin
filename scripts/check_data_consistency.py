@@ -97,6 +97,30 @@ def main() -> int:
             + "\n  - ".join(sorted(missing_badges))
         )
 
+    # ---------- blog.yml ----------
+    posts = load_yaml("blog.yml")["posts"]
+    blog_urls = {p["url"] for p in posts}
+    blog_text = README.read_text(encoding="utf-8")
+    # 仅在"最新博客文章"区块内查找
+    blog_section_match = re.search(
+        r"##\s+(?:<span[^>]*>[^<]*</span>\s*)?最新博客文章(.*?)(?=^##\s|\Z)",
+        blog_text,
+        re.S | re.M,
+    )
+    if blog_section_match:
+        readme_blog_urls = set(
+            re.findall(r"\((https?://[^)]+)\)", blog_section_match.group(1))
+        )
+    else:
+        readme_blog_urls = set()
+
+    missing_blog_in_readme = blog_urls - readme_blog_urls
+    if missing_blog_in_readme:
+        errors.append(
+            "[blog] data/blog.yml 中以下文章未在 README 最新博客文章区块出现:\n  - "
+            + "\n  - ".join(sorted(missing_blog_in_readme))
+        )
+
     # 输出结果
     print(f"已加载 {len(projects)} 个项目 (featured={len(featured_repos)}), "
           f"{len(techs)} 项技术栈")

@@ -66,6 +66,14 @@
 
 ---
 
+## <span aria-hidden="true">📰</span> 最新博客文章
+
+- **[Profile 仓库的全量工程化实践](https://github.com/xfengyin/xfengyin)** — 2026-06-11 · 4 轮审查、36 项问题闭环、从 0 到 94 分的演进
+- **[kongming-agent: 孔明军师 AI 系统架构演进](https://github.com/xfengyin/kongming-agent)** — 2026-06-01 · LLM + RAG + Tool Use
+- **[mini-agent-go: 1000 行 Go 写一个 Agent 框架](https://github.com/xfengyin/mini-agent-go)** — 2026-05-15 · 零依赖 + 6 步 Agent Loop
+
+---
+
 ## <span aria-hidden="true">📬</span> 联系我
 
 <p align="left">
@@ -74,6 +82,9 @@
   </a>
   <a href="https://xfengyin.github.io">
     <img src="https://img.shields.io/badge/Website-个人主页-4A4E50?style=flat-square" alt="xfengyin 个人主页" />
+  </a>
+  <a href="mailto:hi@xfengyin.github.io?subject=Hello%20from%20GitHub">
+    <img src="https://img.shields.io/badge/Email-hi@xfengyin.github.io-D14836?style=flat-square&logo=gmail&logoColor=white" alt="通过邮件联系 xfengyin" />
   </a>
 </p>
 

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/xfengyin/xfengyin/schema/blog.schema.json",
+  "title": "blog.yml",
+  "type": "object",
+  "required": ["posts"],
+  "properties": {
+    "posts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "url", "date", "platform"],
+        "properties": {
+          "title": {"type": "string", "minLength": 1, "maxLength": 200},
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "platform": {
+            "type": "string",
+            "enum": ["github-pages", "juejin", "zhihu", "medium", "personal"]
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
