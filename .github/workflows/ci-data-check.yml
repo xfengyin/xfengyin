@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   data-consistency:
     name: data/*.yml vs README.md + schema
@@ -30,8 +33,10 @@ jobs:
           }
           ok = True
           for yml, schema_path in schemas.items():
-              schema = json.load(open(schema_path))
-              data = yaml.safe_load(open(yml))
+              with open(schema_path, encoding='utf-8') as sf:
+                  schema = json.load(sf)
+              with open(yml, encoding='utf-8') as df:
+                  data = yaml.safe_load(df)
               try:
                   jsonschema.validate(data, schema)
                   print(f'OK  {yml} conforms to {schema_path}')

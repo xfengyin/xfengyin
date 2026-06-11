@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/xfengyin/xfengyin/schemas/projects.schema.json",
+  "$id": "https://github.com/xfengyin/xfengyin/schema/projects.schema.json",
   "title": "projects.yml",
   "type": "object",
   "required": ["projects"],

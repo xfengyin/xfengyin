@@ -15,5 +15,5 @@ updates:
       - "ci"
     # 限制 PR 数量避免噪音
     open-pull-requests-limit: 5
-    # 自动 rebase 减少维护负担
-    rebase-strategy: "auto"
+    # 自动 rebase 减少维护负担 (注意: auto 策略已被标记为将来可能废弃)
+    rebase-strategy: "disabled"

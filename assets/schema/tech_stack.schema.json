@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/xfengyin/xfengyin/schemas/tech_stack.schema.json",
+  "$id": "https://github.com/xfengyin/xfengyin/schema/tech_stack.schema.json",
   "title": "tech_stack.yml",
   "type": "object",
   "required": ["tech_stack"],
@@ -18,8 +18,7 @@
           },
           "badge": {
             "type": "string",
-            "format": "uri",
-            "pattern": "^https://img\\.shields\\.io/.*"
+            "description": "shields.io URL 或本地 SVG 路径"
           },
           "alt": {"type": "string", "minLength": 1}
         },

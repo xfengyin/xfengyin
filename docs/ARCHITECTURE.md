@@ -31,7 +31,7 @@ xfengyin/
 │       ├── ci-link-check.yml          # lychee 链接体检
 │       ├── ci-data-check.yml          # schema + data/README 双向校验
 │       ├── monitor-stats.yml          # 每日 cron 监测外部图像源
-│       └── dependabot-auto-merge.yml  # dependabot patch/minior 自动合入
+│       └── dependabot-auto-merge.yml  # dependabot patch/minor 自动合入
 ├── assets/
 │   ├── badges/                        # 自托管徽章 SVG
 │   │   └── orangepi.svg               # 本地化 OrangePi 徽章
@@ -86,7 +86,7 @@ Profile 仓库本质是"个人品牌门面",**展示形态** > **数据完整性
 | 工作流 | 工具 | 触发 | 失败动作 |
 |--------|------|------|----------|
 | `ci-lint.yml` | `markdownlint-cli2` | push / PR | 阻断合并 |
-| `ci-link-check.yml` | `lychee` | push / PR / cron | 警告 + 自动 issue |
+| `ci-link-check.yml` | `lychee` | push / PR / 手动触发 | 警告 + 自动 issue |
 | `ci-data-check.yml` | `pyyaml` + `jsonschema` | push / PR | 阻断合并 |
 | `monitor-stats.yml` | `curl` + `github-script` | 每日 cron + 手动 | 失败自动开 issue |
 | `dependabot-auto-merge.yml` | `dependabot/fetch-metadata` | dependabot PR | 自动 squash 合并 |

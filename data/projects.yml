@@ -21,7 +21,7 @@ projects:
     featured: true
 
   - name: youth-weekly
-    category: ai-agent
+    category: tooling
     desc: Z 世代内容聚合平台 (科技 / 人文 / 动漫 / 游戏)
     repo: xfengyin/youth-weekly
     featured: true
@@ -75,7 +75,7 @@ projects:
     featured: true
 
   - name: jciyuan-spider
-    category: hardware
+    category: tooling
     desc: Go Web 爬虫
     repo: xfengyin/jciyuan-spider
     featured: true

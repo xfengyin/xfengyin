@@ -12,7 +12,7 @@
 
 ## 自检清单
 
-- [ ] 修改的是 `data/` 或 `includes/`，未手改自动生成内容
+- [ ] 修改的是 `data/` 或 `README.md`，未手改自动生成内容
 - [ ] `data/*.yml` 变更已配套 schema 更新 (如有)
 - [ ] 本地运行 `markdownlint README.md` 通过
 - [ ] 链接、图片、徽章均能在本地预览

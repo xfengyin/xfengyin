@@ -23,7 +23,7 @@ tech_stack:
     alt: Rust
 
   - name: TypeScript
-    category: backend
+    category: frontend
     badge: https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white
     alt: TypeScript
 
@@ -54,5 +54,5 @@ tech_stack:
 
   - name: OrangePi
     category: tooling
-    badge: https://img.shields.io/badge/OrangePi-F9A602?style=flat-square&logo=Linux&logoColor=black
-    alt: OrangePi
+    badge: assets/badges/orangepi.svg
+    alt: "OrangePi: Linux"

@@ -9,8 +9,7 @@
     "localhost",
     "127.0.0.1",
     "0.0.0.0",
-    "https://img.shields.io/badge/.*",
-    "https://github-readme-stats.vercel.app/.*"
+    "https://img.shields.io/badge/.*"
   ],
   "excludeLinkLocal": true,
   "excludeLoopback": true

@@ -67,7 +67,28 @@ jobs:
           script: |
             const fs = require('fs');
             const body = fs.readFileSync('failure.txt', 'utf8');
-            const title = `[monitor-alert] 外部图像源失效 (${new Date().toISOString().slice(0,10)})`;
+            const dateStr = new Date().toISOString().slice(0, 10);
+            const title = `[monitor-alert] 外部图像源失效 (${dateStr})`;
+
+            // Deduplication: check if an open issue with similar title already exists today
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'monitoring-alert',
+            });
+            const todayAlert = issues.find(i => i.title.includes(dateStr) && i.title.includes('外部图像源失效'));
+            if (todayAlert) {
+              console.log(`Open issue #${todayAlert.number} already exists for today, updating comment.`);
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: todayAlert.number,
+                body: `## 再次检测到失效 (re-run)\n\n${body}`,
+              });
+              return;
+            }
+
             await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
