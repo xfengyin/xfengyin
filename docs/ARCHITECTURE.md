@@ -106,14 +106,11 @@ Profile 仓库本质是"个人品牌门面",**展示形态** > **数据完整性
 - **方案 (2)**: 浏览量改用 `komarev.com`,与 stats 服务解耦
 - **验证**: `monitor-stats.yml` 已更新 URL 列表,每日体检新源
 
-### L3. Action 版本未锁 SHA ⚠️ 仍存在
+### L3. ~~Action 版本未锁 SHA~~ ✅ 已解决
 
-- **现状**: 使用浮动 major tag (`@v6`, `@v23`, `@v9`, `@v2`)
-- **缓解**:
-  - `dependabot.yml` 周一自动检测
-  - `dependabot-auto-merge.yml` patch / minor 自动合入
-  - 人工 review major 升级 (目前 4 PR 等待 review)
-- **彻底加固路径**: 待 dependabot 跑稳后,批量将 floating tag 替换为 commit SHA
+- **方案**: 所有 workflow 中 floating tag 替换为 commit SHA + 版本注释
+  例如: `actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3`
+- **持续维护**: `dependabot.yml` 每周一检测版本更新，提 PR 更新 SHA
 
 ## 扩展指南
 

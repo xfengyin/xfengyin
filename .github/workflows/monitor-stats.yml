@@ -15,14 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
       - name: Probe external image sources
         id: probe
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e
-          # 待监测的图像源 URL 列表 (与 README 中保持一致)
           URLS=(
             "https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=white"
             "https://img.shields.io/badge/Website-个人主页-4A4E50?style=flat-square"
@@ -51,10 +50,7 @@ jobs:
                 echo "- \`$entry\`"
               done
               echo ""
-              echo "**处置**:"
-              echo ""
-              echo "1. 重试;若持续失败则替换图像源"
-              echo "2. 修复后请手动关闭本 issue"
+              echo "**处置**: 重试;若持续失败则替换图像源"
             } >> failure.txt
             exit 1
           fi
@@ -62,7 +58,7 @@ jobs:
 
       - name: Open issue on failure
         if: failure()
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const fs = require('fs');
@@ -70,7 +66,6 @@ jobs:
             const dateStr = new Date().toISOString().slice(0, 10);
             const title = `[monitor-alert] 外部图像源失效 (${dateStr})`;
 
-            // Deduplication: check if an open issue with similar title already exists today
             const { data: issues } = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
               repo: context.repo.repo,
