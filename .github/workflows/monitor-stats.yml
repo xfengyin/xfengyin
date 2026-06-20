@@ -25,7 +25,7 @@ jobs:
           URLS=(
             "https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=white"
             "https://img.shields.io/badge/Website-个人主页-4A4E50?style=flat-square"
-            "https://github-readme-streak-stats.demolab.com/?user=xfengyin&theme=radical&hide_border=true"
+            "https://github-readme-streak-stats.herokuapp.com/?user=xfengyin&theme=radical&hide_border=true"
             "https://komarev.com/ghpvc/?username=xfengyin&color=4A4E50&style=flat-square&label=PROFILE+VIEWS"
           )
 
