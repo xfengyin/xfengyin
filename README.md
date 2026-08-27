@@ -61,7 +61,7 @@
 ## <span aria-hidden="true">📈</span> GitHub Stats
 
 <p align="left">
-  <img height="150" alt="xfengyin 的 GitHub 连续贡献统计" src="https://github-readme-streak-stats.demolab.com/?user=xfengyin&theme=radical&hide_border=true" />
+  <img height="150" alt="xfengyin 的 GitHub 连续贡献统计" src="https://streak-stats.demolab.com/?user=xfengyin&theme=radical&hide_border=true" />
 </p>
 
 ---
