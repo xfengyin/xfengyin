@@ -1,8 +1,10 @@
 # <span aria-hidden="true">👋</span> Hi, I'm xfengyin
 
-### <span aria-hidden="true">🎯</span> 全栈开发者 | AI 爱好者 | 硬件玩家
+### <span aria-hidden="true">🎯</span> AI Systems Engineer · AI Agent Engineer
 
-专注 AI 应用、全栈工程与硬件结合的端到端实践。喜欢把有趣的想法变成可用的产品！
+I build **AI agents, developer tools, and edge systems** — from LLM runtimes in Go to AI assistants running on real hardware.
+
+> **From cloud to edge, I build AI systems that actually run.**
 
 <p align="left">
   <img src="https://komarev.com/ghpvc/?username=xfengyin&color=4A4E50&style=flat-square&label=PROFILE+VIEWS" alt="Profile Views" />
@@ -10,78 +12,140 @@
 
 ---
 
-## <span aria-hidden="true">🛠</span> 技术栈
+## <span aria-hidden="true">🧭</span> What I Build
 
-**Backend & Languages**
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=white)
+```text
+AI Agent
+   │
+   ├── LLM / RAG / Tool Calling / MCP
+   ├── Agent Runtime
+   ├── Multi-Agent / Observability
+   │
+   ▼
+Go Systems
+   │
+   ├── CLI / Backend Services
+   ├── Concurrency
+   └── Developer Tools
+   │
+   ▼
+Edge / Hardware
+   │
+   └── OrangePi / Linux / ARM
+```
+
+---
+
+## <span aria-hidden="true">⭐</span> Featured Projects
+
+### 🎋 [Kongming](https://github.com/xfengyin/kongming-agent) — AI Agent Runtime in Go
+
+**Go · LLM · RAG · Tool Calling · MCP · CLI**
+
+A lightweight AI Agent runtime built in Go. It speaks any OpenAI-compatible API, retrieves local knowledge, calls tools, and persists conversations — designed to be readable, embeddable, and extensible.
+
+### 🧠 [MimiClaw-OrangePi](https://github.com/xfengyin/MimiClaw-OrangePi) — AI Agent × Edge Computing
+
+**Go · Linux · OrangePi · Edge AI**
+
+An AI assistant adapted to OrangePi, exploring the boundary between cloud LLMs, local devices, and real-world hardware.
+
+### 📚 [zhihu-salt-novel-downloader](https://github.com/xfengyin/zhihu-salt-novel-downloader) — Full-stack Engineering
+
+**Python · FastAPI · React · TypeScript · Rust · Tauri**
+
+A full-stack content downloader with CLI, Web, and desktop applications: async concurrent downloading, resume, multi-format export, plugin architecture, auth, rate limiting, SSE task streaming, and cross-platform releases.
+
+### 🦀 [orangepi-debug-tool](https://github.com/xfengyin/orangepi-debug-tool) — Rust × Embedded
+
+**Rust · Linux · Embedded**
+
+A desktop debugging tool built for OrangePi development and hardware workflows.
+
+---
+
+## <span aria-hidden="true">🗂</span> Other Projects
+
+- [youth-weekly](https://github.com/xfengyin/youth-weekly) — 青年周刊：科技、人文、动漫、游戏的 Z 世代内容聚合平台
+- [Protocol-algorithm](https://github.com/xfengyin/Protocol-algorithm) — 网络协议与算法学习笔记
+- [jciyuan-spider](https://github.com/xfengyin/jciyuan-spider) — Go Web 爬虫
+- [pikpak_auto_invite](https://github.com/xfengyin/pikpak_auto_invite) — PikPak 自动化邀请
+- [LenovoTool2_V1.0](https://github.com/xfengyin/LenovoTool2_V1.0) — 联想工具集
+- [MaaAutoNaruto](https://github.com/xfengyin/MaaAutoNaruto) — 火影忍者手游自动化工具（MFA 二次开发）
+- [skills-manager-backup](https://github.com/xfengyin/skills-manager-backup) — Skills Manager 备份
+
+---
+
+## <span aria-hidden="true">🛠</span> Tech Stack
+
+**Languages**
+
 ![Go](https://img.shields.io/badge/Go-00ADD8?style=flat-square&logo=Go&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=white)
 ![Rust](https://img.shields.io/badge/Rust-000000?style=flat-square&logo=Rust&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white)
 
-**Frontend & Mobile**
+**AI & Agent**
+
+```text
+LLM · RAG · Tool Calling · MCP · Agent Architecture · Prompt Engineering
+```
+
+**Backend & Systems**
+
+```text
+Go · FastAPI · REST API · Async · Concurrency · CLI · Linux · Docker · OpenTelemetry
+```
+
+**Frontend & Desktop**
+
+![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black)
 ![Vue.js](https://img.shields.io/badge/Vue.js-4FC08D?style=flat-square&logo=Vue.js&logoColor=white)
-![Electron](https://img.shields.io/badge/Electron-47848F?style=flat-square&logo=Electron&logoColor=white)
-![Swift](https://img.shields.io/badge/Swift-FA7343?style=flat-square&logo=Swift&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=TailwindCSS&logoColor=white)
+![Tauri](https://img.shields.io/badge/Tauri-FFC131?style=flat-square&logo=Tauri&logoColor=black)
 
-**Tools & Platforms**
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=Linux&logoColor=black)
+**Hardware & Edge**
+
 <img src="assets/badges/orangepi.svg" alt="OrangePi: Linux" />
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=Linux&logoColor=black)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white)
 
 ---
 
-## <span aria-hidden="true">📂</span> 精选项目
+## <span aria-hidden="true">🧪</span> Engineering Philosophy
 
-### <span aria-hidden="true">🤖</span> AI & Agent
+```text
+Small abstractions
+      ↓
+Readable code
+      ↓
+Explicit boundaries
+      ↓
+Testable components
+      ↓
+Useful products
+```
 
-- **[kongming-agent](https://github.com/xfengyin/kongming-agent)** — 孔明军师 AI 系统，融合三国智慧与现代 Agent 架构 (LLM + RAG + Tool Use)
-- **[mini-agent-go](https://github.com/xfengyin/mini-agent-go)** — 纯 Go 实现的轻量级 AI Agent 框架 (< 1.5k LOC, 零依赖)
-- **[youth-weekly](https://github.com/xfengyin/youth-weekly)** — Z 世代内容聚合平台 (科技 / 人文 / 动漫 / 游戏)
-
-### <span aria-hidden="true">🌐</span> 全栈应用
-
-- **[zhihu-salt-novel-downloader](https://github.com/xfengyin/zhihu-salt-novel-downloader)** — 知乎盐选小说下载器，支持 CLI / GUI 双模式
-- **[signage-dashboard](https://github.com/xfengyin/signage-dashboard)** — 前后端分离的数据可视化系统
-- **[MusicPlayer-Pro](https://github.com/xfengyin/MusicPlayer-Pro)** — 跨平台音乐播放器 (Vue3 + Go + Electron)
-
-### <span aria-hidden="true">🔧</span> 工具 & 效率
-
-- **[TV](https://github.com/xfengyin/TV)** — TVBox / 影视仓配置文件，自动更新直播源
-- **[zen-env](https://github.com/xfengyin/zen-env)** — 下一代 Python 环境管理器，支持意图驱动配置
-- **[qinglong-rs](https://github.com/xfengyin/qinglong-rs)** — 轻量级定时任务管理面板 Rust 重构版
-
-### <span aria-hidden="true">💻</span> 硬件 & 嵌入式
-
-- **[MimiClaw-OrangePi](https://github.com/xfengyin/MimiClaw-OrangePi)** — 香橙派 AI 助手
-- **[UHTF](https://github.com/xfengyin/UHTF)** — 通用硬件测试框架
-- **[jciyuan-spider](https://github.com/xfengyin/jciyuan-spider)** — Go Web 爬虫
+I care about understanding the system behind the abstraction rather than simply stacking frameworks.
 
 ---
 
-## <span aria-hidden="true">📈</span> GitHub Stats
+## <span aria-hidden="true">📰</span> Writing
 
-<p align="left">
-  <img height="150" alt="xfengyin 的 GitHub 连续贡献统计" src="https://raw.githubusercontent.com/xfengyin/xfengyin/main/assets/badges/streak-stats.svg" />
-</p>
-
----
-
-## <span aria-hidden="true">📰</span> 最新博客文章
-
-- **[Profile 仓库的全量工程化实践](https://github.com/xfengyin/xfengyin)** — 2026-06-11 · 4 轮审查、36 项问题闭环、从 0 到 94 分的演进
-- **[kongming-agent: 孔明军师 AI 系统架构演进](https://github.com/xfengyin/kongming-agent)** — 2026-06-01 · LLM + RAG + Tool Use
-- **[mini-agent-go: 1000 行 Go 写一个 Agent 框架](https://github.com/xfengyin/mini-agent-go)** — 2026-05-15 · 零依赖 + 6 步 Agent Loop
+- [kongming-agent: 孔明军师 AI 系统架构演进](https://github.com/xfengyin/kongming-agent) — LLM + RAG + Tool Use
+- [Profile 仓库的全量工程化实践](https://github.com/xfengyin/xfengyin) — 从 0 到 94 分的演进
+- [blog 优化笔记](https://xfengyin.github.io/posts/2026-04-03-blog-optimization-notes/) — Zola 静态站点工程化
 
 ---
 
-## <span aria-hidden="true">📬</span> 联系我
+## <span aria-hidden="true">📬</span> Contact
 
 <p align="left">
   <a href="https://github.com/xfengyin">
     <img src="https://img.shields.io/badge/GitHub-xfengyin-181717?style=flat-square&logo=GitHub" alt="xfengyin 的 GitHub 主页" />
   </a>
   <a href="https://xfengyin.github.io">
-    <img src="https://img.shields.io/badge/Website-个人主页-4A4E50?style=flat-square" alt="xfengyin 个人主页" />
+    <img src="https://img.shields.io/badge/Website-xfengyin.github.io-4A4E50?style=flat-square" alt="xfengyin 个人主页" />
   </a>
   <a href="mailto:hi@xfengyin.github.io?subject=Hello%20from%20GitHub">
     <img src="https://img.shields.io/badge/Email-hi@xfengyin.github.io-D14836?style=flat-square&logo=gmail&logoColor=white" alt="通过邮件联系 xfengyin" />
@@ -90,6 +154,6 @@
 
 ---
 
-> <span aria-hidden="true">💡</span> 把好玩的想法做成能用的产品，让 AI 在每个工程师的终端里跑起来。
+> <span aria-hidden="true">💡</span> From cloud to edge, I build AI systems that actually run.
 
-<span aria-hidden="true">⭐</span> 欢迎 Star、Fork 与交流!
+<span aria-hidden="true">⭐</span> Welcome to Star, Fork, and build together!
