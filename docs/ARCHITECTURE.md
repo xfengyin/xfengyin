@@ -5,7 +5,7 @@
 ## 设计原则
 
 | 原则 | 落地方式 |
-|------|----------|
+| ------ | ---------- |
 | **OCP 友好** | 新增板块只新增 `data/*.yml` + README 引用,不动既有结构 |
 | **最小工程化** | 不做全自动 SSG (过度工程化),人维护 README,数据文件做引用源 |
 | **可观测** | CI 链接体检每日跑,断链 / 渲染异常自动开 issue |
@@ -15,7 +15,7 @@
 
 ## 目录结构
 
-```
+```text
 xfengyin/
 ├── .github/
 │   ├── ISSUE_TEMPLATE/                # 规范化协作流程
@@ -76,7 +76,7 @@ Profile 仓库本质是"个人品牌门面",**展示形态** > **数据完整性
 ### 2. 外部图像源选型
 
 | 服务 | 用途 | 部署 | 选型理由 |
-|------|------|------|----------|
+| ------ | ------ | ------ | ---------- |
 | `img.shields.io` | 技术栈徽章 | shields.io | 行业标准,多语言支持 |
 | `github-readme-streak-stats.demolab.com` | 连续贡献 | demolab | anuraghazra 官方部署,稳定 |
 | `komarev.com` | Profile 浏览量 | komarev | 轻量、活跃维护 |
@@ -86,7 +86,7 @@ Profile 仓库本质是"个人品牌门面",**展示形态** > **数据完整性
 ### 3. CI 质量门禁
 
 | 工作流 | 工具 | 触发 | 失败动作 |
-|--------|------|------|----------|
+| ------ | ------ | ------ | ---------- |
 | `ci-lint.yml` | `markdownlint-cli2` | push / PR | 阻断合并 |
 | `ci-link-check.yml` | `lychee` | push / PR / 手动触发 | 警告 + 自动 issue |
 | `ci-data-check.yml` | `pyyaml` + `jsonschema` | push / PR | 阻断合并 |
@@ -154,7 +154,7 @@ Profile 仓库本质是"个人品牌门面",**展示形态** > **数据完整性
 ## 变更历史
 
 | 日期 | 变更 |
-|------|------|
+| ------ | ------ |
 | 2026-06-11 (v4.1.0) | 新增 blog.yml + schema + 校验；dependabot-auto-merge fetch-metadata 升级到 v3.1.0 (SHA 锁定) |
 | 2026-06-11 (v4.0.0) | 关闭 6 个跟踪 issue: L3 SHA 锁定 + 5 个 P2/P3 |
 | 2026-06-11 (v3) | 弃用 vercel.app / 迁移 streak & view / 自托管 OrangePi SVG / 加 schema 校验 / 加 auto-merge / 加 CODEOWNERS & FUNDING & CoC |

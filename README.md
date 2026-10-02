@@ -1,6 +1,6 @@
 # <span aria-hidden="true">👋</span> Hi, I'm xfengyin
 
-### <span aria-hidden="true">🎯</span> AI Systems Engineer · AI Agent Engineer
+## <span aria-hidden="true">🎯</span> AI Systems Engineer · AI Agent Engineer
 
 I build **AI agents, developer tools, and edge systems** — from LLM runtimes in Go to AI assistants running on real hardware.
 
