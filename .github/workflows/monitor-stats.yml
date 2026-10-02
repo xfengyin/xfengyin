@@ -31,9 +31,15 @@ jobs:
 
           FAILED=()
           for url in "${URLS[@]}"; do
-            status=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 15 "$url" || echo "000")
+            # 每个 URL 重试 3 次,抵御代理节点波动导致的间歇性超时
+            status="000"
+            for attempt in 1 2 3; do
+              status=$(curl -s -o /dev/null -w "%{http_code}" -L --max-time 15 "$url" 2>/dev/null || echo "000")
+              [[ "$status" == "200" ]] && break
+              sleep 3
+            done
             if [[ "$status" != "200" ]]; then
-              echo "FAIL $status $url"
+              echo "FAIL $status $url (after $attempt attempts)"
               FAILED+=("$status $url")
             else
               echo "OK   $status $url"
@@ -84,10 +90,22 @@ jobs:
               return;
             }
 
+            // Gitea 的 create issue API 要求 labels 为整数 ID;GitHub 接受字符串名称
+            let issueLabels;
+            if (process.env.GITHUB_SERVER_URL !== 'https://github.com') {
+              const { data: repoLabels } = await github.rest.issues.listLabelsForRepo({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+              });
+              const want = new Set(['monitoring-alert', 'bug']);
+              issueLabels = repoLabels.filter(l => want.has(l.name)).map(l => l.id);
+            } else {
+              issueLabels = ['monitoring-alert', 'bug'];
+            }
             await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: title,
               body: body + '\n\n---\n由 `monitor-stats.yml` 自动创建',
-              labels: ['monitoring-alert', 'bug'],
+              labels: issueLabels,
             });
