@@ -29,7 +29,7 @@ def extract_readme_projects() -> set[str]:
     text = README.read_text(encoding="utf-8")
     # 仅在 "精选项目" 区块内查找 (兼容 aria-hidden 包裹的标题)
     match = re.search(
-        r"##\s+(?:<span[^>]*>[^<]*</span>\s*)?精选项目(.*?)(?=^##\s|\Z)",
+        r"##\s+(?:<span[^>]*>[^<]*</span>\s*)?(?:精选项目|Featured Projects)(.*?)(?=^##\s|\Z)",
         text,
         re.S | re.M,
     )
@@ -103,7 +103,7 @@ def main() -> int:
     blog_text = README.read_text(encoding="utf-8")
     # 仅在"最新博客文章"区块内查找
     blog_section_match = re.search(
-        r"##\s+(?:<span[^>]*>[^<]*</span>\s*)?最新博客文章(.*?)(?=^##\s|\Z)",
+        r"##\s+(?:<span[^>]*>[^<]*</span>\s*)?(?:最新博客文章|Writing)(.*?)(?=^##\s|\Z)",
         blog_text,
         re.S | re.M,
     )

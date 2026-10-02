@@ -32,16 +32,6 @@ tech_stack:
     badge: https://img.shields.io/badge/Vue.js-4FC08D?style=flat-square&logo=Vue.js&logoColor=white
     alt: Vue.js
 
-  - name: Electron
-    category: frontend
-    badge: https://img.shields.io/badge/Electron-47848F?style=flat-square&logo=Electron&logoColor=white
-    alt: Electron
-
-  - name: Swift
-    category: frontend
-    badge: https://img.shields.io/badge/Swift-FA7343?style=flat-square&logo=Swift&logoColor=white
-    alt: Swift
-
   - name: Docker
     category: tooling
     badge: https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=Docker&logoColor=white

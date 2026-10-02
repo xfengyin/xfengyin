@@ -16,8 +16,3 @@ posts:
     url: https://github.com/xfengyin/kongming-agent
     date: "2026-06-01"
     platform: github-pages
-
-  - title: "mini-agent-go: 1000 行 Go 写一个 Agent 框架"
-    url: https://github.com/xfengyin/mini-agent-go
-    date: "2026-05-15"
-    platform: github-pages
