@@ -9,6 +9,14 @@ on:
 permissions:
   contents: read
 
+env:
+  # pip 默认打 pypi.org：本机实测 index 0.28s(清华) vs 1.09s(官方)，
+  # 而 protocol-algorithm 的 task 1135 因为直连官方索引卡了 42 分钟才被人顶掉。
+  # 超时也一起收紧：pip 默认 5 次重试 x 15 秒会叠加成几十分钟静默等待。
+  PIP_INDEX_URL: https://pypi.tuna.tsinghua.edu.cn/simple
+  PIP_DEFAULT_TIMEOUT: "15"
+  PIP_RETRIES: "2"
+
 jobs:
   data-consistency:
     name: data/*.yml vs README.md + schema
