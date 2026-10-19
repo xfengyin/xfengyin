@@ -50,29 +50,12 @@ A lightweight AI Agent runtime built in Go. It speaks any OpenAI-compatible API,
 
 An AI assistant adapted to OrangePi, exploring the boundary between cloud LLMs, local devices, and real-world hardware.
 
-### 📚 [zhihu-salt-novel-downloader](https://github.com/xfengyin/zhihu-salt-novel-downloader) — Full-stack Engineering
-
-**Python · FastAPI · React · TypeScript · Rust · Tauri**
-
-A full-stack content downloader with CLI, Web, and desktop applications: async concurrent downloading, resume, multi-format export, plugin architecture, auth, rate limiting, SSE task streaming, and cross-platform releases.
-
-### 🦀 [orangepi-debug-tool](https://github.com/xfengyin/orangepi-debug-tool) — Rust × Embedded
-
-**Rust · Linux · Embedded**
-
-A desktop debugging tool built for OrangePi development and hardware workflows.
-
 ---
 
 ## <span aria-hidden="true">🗂</span> Other Projects
 
-- [youth-weekly](https://github.com/xfengyin/youth-weekly) — 青年周刊：科技、人文、动漫、游戏的 Z 世代内容聚合平台
 - [Protocol-algorithm](https://github.com/xfengyin/Protocol-algorithm) — 网络协议与算法学习笔记
 - [jciyuan-spider](https://github.com/xfengyin/jciyuan-spider) — Go Web 爬虫
-- [pikpak_auto_invite](https://github.com/xfengyin/pikpak_auto_invite) — PikPak 自动化邀请
-- [LenovoTool2_V1.0](https://github.com/xfengyin/LenovoTool2_V1.0) — 联想工具集
-- [MaaAutoNaruto](https://github.com/xfengyin/MaaAutoNaruto) — 火影忍者手游自动化工具（MFA 二次开发）
-- [skills-manager-backup](https://github.com/xfengyin/skills-manager-backup) — Skills Manager 备份
 
 ---
 
@@ -134,7 +117,6 @@ I care about understanding the system behind the abstraction rather than simply 
 
 - [kongming-agent: 孔明军师 AI 系统架构演进](https://github.com/xfengyin/kongming-agent) — LLM + RAG + Tool Use
 - [Profile 仓库的全量工程化实践](https://github.com/xfengyin/xfengyin) — 从 0 到 94 分的演进
-- [blog 优化笔记](https://xfengyin.github.io/posts/2026-04-03-blog-optimization-notes/) — Zola 静态站点工程化
 
 ---
 
