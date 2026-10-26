@@ -13,7 +13,7 @@
 ## 自检清单
 
 - [ ] 修改的是 `data/` 或 `README.md`，未手改自动生成内容
-- [ ] `data/*.yml` 变更已配套 schema 更新 (如有)
+- [ ] `data/*.yml` 变更已在 `README.md` 对应区块手工同步 (本仓无 CI 校验)
 - [ ] 本地运行 `markdownlint README.md` 通过
 - [ ] 链接、图片、徽章均能在本地预览
 - [ ] 新增板块已在 `docs/ARCHITECTURE.md` 登记 (如有)
