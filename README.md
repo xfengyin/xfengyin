@@ -75,15 +75,12 @@ LLM · RAG · MCP client · Agent CLI design
 **Backend & Systems**
 
 ```text
-Go · FastAPI · REST API · Async · Concurrency · CLI · Linux · Docker · OpenTelemetry
+Go · REST API · Async · Concurrency · CLI · Linux · Docker
 ```
 
 **Frontend & Desktop**
 
 ![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black)
-![Vue.js](https://img.shields.io/badge/Vue.js-4FC08D?style=flat-square&logo=Vue.js&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=TailwindCSS&logoColor=white)
-![Tauri](https://img.shields.io/badge/Tauri-FFC131?style=flat-square&logo=Tauri&logoColor=black)
 
 **Hardware & Edge**
 
