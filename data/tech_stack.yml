@@ -27,10 +27,6 @@ tech_stack:
     badge: https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=TypeScript&logoColor=white
     alt: TypeScript
 
-  - name: Vue.js
-    category: frontend
-    badge: https://img.shields.io/badge/Vue.js-4FC08D?style=flat-square&logo=Vue.js&logoColor=white
-    alt: Vue.js
 
   - name: Docker
     category: tooling
