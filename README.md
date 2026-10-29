@@ -17,9 +17,8 @@ I build **AI agents, developer tools, and edge systems** — from LLM runtimes i
 ```text
 AI Agent
    │
-   ├── LLM / RAG / Tool Calling / MCP
-   ├── Agent Runtime
-   ├── Multi-Agent / Observability
+   ├── LLM / RAG / MCP client
+   ├── Tool pre-check (CLI agent)
    │
    ▼
 Go Systems
@@ -38,11 +37,11 @@ Edge / Hardware
 
 ## <span aria-hidden="true">⭐</span> Featured Projects
 
-### 🎋 [Kongming](https://github.com/xfengyin/kongming-agent) — AI Agent Runtime in Go
+### 🎋 [Kongming](https://github.com/xfengyin/kongming-agent) — A small LLM agent CLI in Go
 
-**Go · LLM · RAG · Tool Calling · MCP · CLI**
+**Go · LLM · RAG · MCP client · CLI**
 
-A lightweight AI Agent runtime built in Go. It speaks any OpenAI-compatible API, retrieves local knowledge, calls tools, and persists conversations — designed to be readable, embeddable, and extensible.
+A small LLM agent CLI in Go. It speaks any OpenAI-compatible API, retrieves local knowledge, answers some questions with built-in tools before calling the model (a calculator), can mount a stdio MCP server whose tools are triggered by name, and persists conversations. The model does not choose tools itself yet.
 
 ### 🧠 [jciyuan-spider](https://github.com/xfengyin/jciyuan-spider) — Crawler framework in Go
 
@@ -70,7 +69,7 @@ A small, general crawler framework: a `Crawler` interface (Fetch → Parse → E
 **AI & Agent**
 
 ```text
-LLM · RAG · Tool Calling · MCP · Agent Architecture · Prompt Engineering
+LLM · RAG · MCP client · Agent CLI design
 ```
 
 **Backend & Systems**
@@ -109,13 +108,6 @@ Useful products
 ```
 
 I care about understanding the system behind the abstraction rather than simply stacking frameworks.
-
----
-
-## <span aria-hidden="true">📰</span> Writing
-
-- [kongming-agent: 孔明军师 AI 系统架构演进](https://github.com/xfengyin/kongming-agent) — LLM + RAG + Tool Use
-- [Profile 仓库的全量工程化实践](https://github.com/xfengyin/xfengyin) — 从 0 到 94 分的演进
 
 ---
 
