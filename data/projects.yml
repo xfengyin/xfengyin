@@ -8,82 +8,16 @@
 #   featured: 是否在 README Featured Projects 区块展示
 
 projects:
-  # --- README Featured Projects (featured: true) ---
+  # 只列出真实存在且公开可访问的仓库（2026-10-29 逐个核对 HTTP 200）。
+  # 私有仓库和已删除仓库不在公开主页上展示。
   - name: kongming-agent
     category: ai-agent
     desc: 孔明军师 AI 系统,融合三国智慧与现代 Agent 架构 (LLM + RAG + Tool Use)
     repo: xfengyin/kongming-agent
     featured: true
 
-  - name: MimiClaw-OrangePi
-    category: hardware
-    desc: 香橙派 AI 助手
-    repo: xfengyin/MimiClaw-OrangePi
-    featured: true
-
-  - name: zhihu-salt-novel-downloader
-    category: fullstack
-    desc: 知乎盐选小说下载器,支持 CLI / GUI 双模式
-    repo: xfengyin/zhihu-salt-novel-downloader
-    featured: true
-
-  - name: orangepi-debug-tool
-    category: hardware
-    desc: OrangePi 开发与硬件工作流的桌面调试工具 (Rust + Tauri)
-    repo: xfengyin/orangepi-debug-tool
-    featured: true
-
-  # --- Other Projects (featured: false) ---
-  - name: mini-agent-go
-    category: ai-agent
-    desc: 纯 Go 实现的轻量级 AI Agent 框架 (< 1.5k LOC, 零依赖)
-    repo: xfengyin/mini-agent-go
-    featured: false
-
-  - name: youth-weekly
-    category: tooling
-    desc: Z 世代内容聚合平台 (科技 / 人文 / 动漫 / 游戏)
-    repo: xfengyin/youth-weekly
-    featured: false
-
-  - name: signage-dashboard
-    category: fullstack
-    desc: 前后端分离的数据可视化系统
-    repo: xfengyin/signage-dashboard
-    featured: false
-
-  - name: MusicPlayer-Pro
-    category: fullstack
-    desc: 跨平台音乐播放器 (Vue3 + Go + Electron)
-    repo: xfengyin/MusicPlayer-Pro
-    featured: false
-
-  - name: TV
-    category: tooling
-    desc: TVBox / 影视仓配置文件,自动更新直播源
-    repo: xfengyin/TV
-    featured: false
-
-  - name: zen-env
-    category: tooling
-    desc: 下一代 Python 环境管理器,支持意图驱动配置
-    repo: xfengyin/zen-env
-    featured: false
-
-  - name: qinglong-rs
-    category: tooling
-    desc: 轻量级定时任务管理面板 Rust 重构版
-    repo: xfengyin/qinglong-rs
-    featured: false
-
-  - name: UHTF
-    category: hardware
-    desc: 通用硬件测试框架
-    repo: xfengyin/UHTF
-    featured: false
-
   - name: jciyuan-spider
     category: tooling
-    desc: Go Web 爬虫
+    desc: 轻量通用 Go 爬虫框架（Fetch → Parse → Extract，统一调度并发 / 重试 / 限速）
     repo: xfengyin/jciyuan-spider
-    featured: false
+    featured: true
