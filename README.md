@@ -44,18 +44,17 @@ Edge / Hardware
 
 A lightweight AI Agent runtime built in Go. It speaks any OpenAI-compatible API, retrieves local knowledge, calls tools, and persists conversations — designed to be readable, embeddable, and extensible.
 
-### 🧠 [MimiClaw-OrangePi](https://github.com/xfengyin/MimiClaw-OrangePi) — AI Agent × Edge Computing
+### 🧠 [jciyuan-spider](https://github.com/xfengyin/jciyuan-spider) — Crawler framework in Go
 
-**Go · Linux · OrangePi · Edge AI**
+**Go · Concurrency · Rate limiting · Retries**
 
-An AI assistant adapted to OrangePi, exploring the boundary between cloud LLMs, local devices, and real-world hardware.
+A small, general crawler framework: a `Crawler` interface (Fetch → Parse → Extract) with a shared engine that schedules concurrency, retries, rate limiting and result output.
 
 ---
 
 ## <span aria-hidden="true">🗂</span> Other Projects
 
-- [Protocol-algorithm](https://github.com/xfengyin/Protocol-algorithm) — 网络协议与算法学习笔记
-- [jciyuan-spider](https://github.com/xfengyin/jciyuan-spider) — Go Web 爬虫
+- [Protocol-algorithm](https://github.com/xfengyin/Protocol-algorithm) — 无线传感器网络（WSN）中 LEACH 协议的仿真与 AI 优化平台
 
 ---
 
