@@ -1,158 +1,93 @@
-# 架构设计 (Architecture)
+# 架构设计 (v6)
 
-本文件记录 `xfengyin/xfengyin` Profile 仓库的架构决策与扩展指南。
+本文件记录 `xfengyin/xfengyin`（Profile 仓库）的架构决策。它只描述**当前存在的东西**。
 
-> **前提**:本仓**没有 CI**。GitHub Actions 默认关闭,`.github/workflows/` 与 `.gitea/` 均不存在;
-> 所有"门禁"都是提交者本地的人工动作,见 `.github/PULL_REQUEST_TEMPLATE.md` 的自检清单。
-> 历史背景见 [已知限制](#已知限制-known-limitations) 与「质量门禁的现状」。
+> **前提**：本仓没有 CI，也没有生成器。`README.md` 是唯一被 GitHub 渲染的产物；
+> 唯一的执行者是 `scripts/check.sh`，由提交者在本地手动运行并把输出贴进 PR。
+> 任何"看起来会自动校验"的描述都是假的，本文件不再保留这类句子。
 
 ## 设计原则
 
 | 原则 | 落地方式 |
-| ------ | ---------- |
-| **OCP 友好** | 新增板块只新增 `data/*.yml` + README 引用,不动既有结构 |
-| **最小工程化** | 不做全自动 SSG (过度工程化),人维护 README,数据文件做引用源 |
-| **无自动化门禁** | 链接体检、数据与 README 的一致性都由提交者本地自查;本仓没有 workflow 可跑 |
-| **可访问性** | 所有 `<img>` 必带 `alt`,装饰 emoji 用 `aria-hidden` 包裹 |
-| **安全合规** | 第三方图像源在 `SECURITY.md` 中声明 |
-| **无第三方依赖** | 只有 Markdown / YAML / 自托管 SVG,没有包管理器清单,因此也不需要 Dependabot |
+| --- | --- |
+| **单一渲染产物** | 只有 `README.md` 面向访客；不存在需要与它同步的第二份数据源 |
+| **声称必须可指** | 每条能力声称指向 `repo@branch:path`；分支混用（main / master）由门禁校验 |
+| **一条真跑的门禁** | `scripts/check.sh`：零第三方依赖，checked==0 ⇒ SELF-ERROR exit 2，测不出来 ⇒ ERROR exit 2 |
+| **零外部图片** | 不加载 shields / 计数器 / 统计卡，README 的访客侧跨源请求数为 0 |
+| **可访问性可达成** | 标题不放装饰 emoji（GitHub sanitizer 会剥掉 span 上的 `aria-hidden`） |
+| **不过度工程化** | 不再引入 schema / 校验脚本 / 生成器三件套；要加就得同时有执行者 |
 
 ## 目录结构
 
 ```text
 xfengyin/
-├── .github/
-│   ├── ISSUE_TEMPLATE/                # 规范化协作流程
-│   │   ├── bug_report.md
-│   │   ├── feature_request.md
-│   │   └── content_update.md
-│   ├── PULL_REQUEST_TEMPLATE.md       # PR 自检清单(人工门禁的唯一载体)
-│   ├── CODEOWNERS                     # 默认 owner
-│   └── FUNDING.yml                    # Sponsor 配置
-├── assets/
-│   └── badges/                        # 自托管徽章 SVG
-│       ├── orangepi.svg               # 本地化 OrangePi 徽章
-│       └── streak-stats.svg           # 连续贡献徽章快照
-├── data/                              # 单一事实源
-│   ├── projects.yml                   # 精选项目
-│   ├── tech_stack.yml                 # 技术栈
-│   └── blog.yml                       # 最新博客文章
+├── .github/                  # ISSUE_TEMPLATE / PULL_REQUEST_TEMPLATE / CODEOWNERS / FUNDING
 ├── docs/
-│   └── ARCHITECTURE.md                # 本文件
-├── .markdownlint.json                 # 本地 markdownlint 规则(人工执行,无 CI)
-├── .gitignore
-├── CODE_OF_CONDUCT.md                 # Contributor Covenant v2.1
-├── LICENSE                            # MIT
-├── README.md                          # 门面 (人维护)
+│   ├── ARCHITECTURE.md        # 本文件
+│   └── THIRD_PARTY.md         # 外部依赖与网络面清单（含核验日期）
+├── scripts/
+│   └── check.sh               # 唯一门禁：内容一致性 + 零泄露
+├── .markdownlint.json
+├── CODE_OF_CONDUCT.md
+├── LICENSE
+├── README.md                  # 门面，也是唯一事实源
 └── SECURITY.md
 ```
 
 ## 关键决策
 
-### 1. 为什么不用全自动 SSG?
+### 1. 删除 `data/*.yml` 与 `assets/badges/`（2026-10-29）
 
-Profile 仓库本质是"个人品牌门面",**展示形态** > **数据完整性**。全自动生成器会带来:
+- 三个 YAML 与两个 SVG 在仓库里**没有任何消费方**：README 不引用它们，也没有生成器或校验脚本读取它们。
+- 这是同一反模式的第二次复发：2026-10-26 已删过一次"无执行者的数据契约层"（schema + 校验脚本 + workflow），`data/` 是它剩下的壳。
+- 保留 `data/` 的唯一合理前提是同时交付"生成器 + 校验 + 真实执行点"，而本仓一年改动几次，与"不恢复 CI"的决策直接冲突。
+- **推翻条件**：若站点仓库或某个生成器真的开始读取这些文件，则应恢复数据层，并把 `check.sh` 的一致性检查接上同一个执行者。
 
-- README 中 `{{ include }}` 残留风险
-- CI 渲染产物 vs 提交产物的 diff 噪音
-- 维护模板 / 数据 / 渲染器三件套的认知负担
+### 2. 不放徽章、统计卡与浏览量计数器
 
-采用"数据-展示分离但人维护"的折中:
+- 实测：GitHub 把 README 外链图片经 `camo.githubusercontent.com` 代理，访客 IP 并不直接暴露给第三方；**所以移除它们的理由是完整性与可用性，不是访客隐私**。
+- 但 `komarev.com` 是动态、`no-store` 的单人 PHP 服务，数字既可被任意 curl 刷高，域名易主后主页就会显示攻击者可控图文；`img.shields.io` 从本机采样 6 次有 2 次 10s 超时。
+- `assets/badges/streak-stats.svg` 是手绘柱状图，无数据源、无生成日期，属伪造统计，已删除。
+- 结论：外部图片请求数 = 0，由 `check.sh` 第 9 项锁死。
 
-- `data/*.yml` 是结构化数据,机器可读
-- README.md 是给人看的渲染结果,人维护
-- 二者的交叉核对是**手动**的:改完 `data/*.yml` 立刻在 README 对应区块同步
-  (2026-10-26 之前这里挂着一个校验脚本 + 一份 JSON Schema,但没有任何执行者调用它们,已删除)
+### 3. 联系渠道不写 mailto
 
-### 2. 外部图像源选型
+- `github.io` 与其子域均无 MX 记录（1.1.1.1 / 8.8.8.8 / 223.5.5.5 三家实测），Pages 节点 25 端口不通；`hi@xfengyin.github.io` 属于"点得到、必退信"的死信道，且 `github.io` 不受本账号控制，无法配置 SPF/DMARC。
+- 现渠道为 GitHub issue（本仓 `has_issues=true`）。若将来换自有域名邮箱，`check.sh` 第 6 项会强制校验 MX。
 
-| 服务 | 用途 | 部署 | 选型理由 |
-| ------ | ------ | ------ | ---------- |
-| `img.shields.io` | 技术栈徽章 | shields.io | 行业标准,多语言支持 |
-| `github-readme-streak-stats.demolab.com` | 连续贡献 | demolab | anuraghazra 官方部署,稳定 |
-| `komarev.com` | Profile 浏览量 | komarev | 轻量、活跃维护 |
+### 4. 深链必须带正确分支
 
-> ⚠️ 已 **弃用** `github-readme-stats.vercel.app` (原审查标记的半弃用服务)。
+`kongming-agent` 与 `Protocol-algorithm` 的默认分支是 `master`，其余为 `main`。写错分支的 blob 链接会 404。
+`check.sh` 第 2 项对 README 里每条 `blob/tree` 链接调用 contents API（带 `?ref=`），404 即失败。
 
-### 3. 质量门禁的现状:没有 CI
+### 5. 门禁的三条硬规则
 
-本仓曾经有 5 个 workflow(`ci-lint` / `ci-link-check` / `ci-data-check` / `monitor-stats` /
-`dependabot-auto-merge`)。2026-10-14 按"GitHub Actions 默认关闭"的口径把 `.github/workflows/` 整个删除后,
-**它们都不存在了,本仓不再有任何自动化校验**。
+1. 每类检查都报告 target 数量；`checked == 0` 一律 `SELF-ERROR exit 2`（站点侧 `content-drift-check.py` 曾对空目标报"无漂移 exit 0"，属假绿，不接受同款设计）。
+2. 网络失败 / 限流记 **ERROR** 并 `exit 2`：测不出来不等于通过。
+3. 只用 `curl / grep / sed / awk`，不引入包管理，因此不存在 lockfile 缺失与 `npx` 现拉未固定版本包的供应链面。
 
-保留下来的人工门禁只有三件事,全部写在 PR 模板里:
+## 已知限制（故意记录，不等于已修复）
 
-1. 改的是 `data/` 或 `README.md`,不手改"看起来是生成的"内容
-2. 本地跑 `markdownlint README.md`(规则在 `.markdownlint.json`)
-3. 链接、图片、徽章在本地预览可达
+| # | 限制 | 现状 |
+| --- | --- | --- |
+| L1 | **公开 git 历史仍含私有仓名** | `README.md` 的历史版本（如 `f9db836`、`939d611`）与 PR #105 正文可被匿名读取，其中点名的 7 个仓库**至今仍为 private**（API 实测）。当前树已清理干净，历史未清理。 |
+| L2 | **是否重写历史：决定不重写** | 36 commits、forks=0、network_count=0，技术上可重写；但 #104/#105/#106 仍引用旧 head，PR 正文不受重写影响，CDN 与搜索残留不可控。改走：编辑 PR 正文 + `check.sh` 泄露门禁 + GitHub Support 清除流程 + 书面风险接受。 |
+| L3 | **提交作者邮箱公开** | `git log --format=%ae` 含个人邮箱与非 noreply 身份（含 agent/bot 与主机名邮箱）；主页文案不依赖署名一致性。 |
+| L4 | **分支保护是名义存在** | 实测 `branches/main/protection`：不要求 approve review、无状态检查、`enforce_admins=false`，因此 CODEOWNERS 无强制力；本仓内容风险由单人自审承担。 |
+| L5 | **门禁靠人跑** | 无 CI。绕过方式是可发现的：PR 必须附 `check.sh` 输出；不附输出的 PR 视为未验证。 |
+| L6 | **仓库 issue 列表有历史告警** | 已关闭的 monitor 告警与 dependabot 记录仍在公开 issue 列表中，属历史痕迹，不删除。 |
 
-**不打算恢复 CI**:本仓一年只改几次(YAML 数据 + 手写 README),维护 5 个 workflow 的成本高于收益。
-将来真要加,也只能加一条"数据/README 一致性"检查,并让它真的读 schema——而不是再存一份没人执行的契约。
+## 人工门禁（PR 自检 = 命令，而不是形容词）
 
-## 已知限制 (Known Limitations)
-
-> 本节明确记录"已知但故意未修复"的问题,避免读者误判项目质量。
-
-### L1. ~~OrangePi 徽章 logo 错配~~ ✅ 已解决
-
-- **方案**: 自托管 `assets/badges/orangepi.svg`,完全脱离 shields.io
-- **优势**: 不受 simpleicons 覆盖范围限制,brand 一致
-
-### L2. ~~`github-readme-stats.vercel.app` 依赖~~ ✅ 已解决
-
-- **方案**: 迁移到 `github-readme-streak-stats.demolab.com`
-- **方案 (2)**: 浏览量改用 `komarev.com`,与 stats 服务解耦
-- **验证**: 新源 URL 已人工核验可达;原先的每日 URL 体检 workflow 已随 Actions 关闭删除,
-  这类回归现在靠提交 PR 时的本地预览发现
-
-### L3. ~~Action 版本未锁 SHA~~ ✅ 随 Actions 关闭而消失
-
-- **方案**: 本仓已无 workflow 文件,不存在 floating tag ⇒ 无 SHA 锁定问题
-- **若将来恢复 CI**: 必须重新锁定 SHA 并启用 Dependabot,别直接写 `@v4`
-
-## 扩展指南
-
-### 新增一个精选项目
-
-1. 编辑 `data/projects.yml`:
-   ```yaml
-   - name: my-new-project
-     category: ai-agent
-     desc: 一句话描述
-     repo: xfengyin/my-new-project
-     featured: true
-   ```
-2. 编辑 `README.md` 对应分类区块,加一行
-3. 提交 PR,在自检清单里确认"数据与 README 一致"(本仓无 CI 会替你查)
-
-### 新增一个技术栈徽章
-
-1. 编辑 `data/tech_stack.yml`:
-   ```yaml
-   - name: Rust
-     category: backend
-     badge: https://img.shields.io/badge/Rust-000000?style=flat-square&logo=Rust&logoColor=white
-     alt: Rust
-   ```
-2. 编辑 `README.md` 对应分组
-3. 提交 PR
-
-### 新增板块 (例如博客聚合)
-
-1. 新建 `data/blog.yml`
-2. 在 `README.md` 中手工嵌入
-3. 在 `docs/ARCHITECTURE.md` 的"目录结构"一节同步登记
-
-> 原则: 任何"新增能力"都通过新增 `data/*.yml` + 手工 README 嵌入完成,不动既有结构。
-> 不要再引入"没人执行的契约"(JSON Schema / 校验脚本 / workflow) —— 要么接上执行者,要么不写。
+```bash
+bash scripts/check.sh                 # 期望 PASS=n FAIL=0 ERROR=0，输出贴进 PR
+npx --yes markdownlint-cli@0.42.0 README.md docs/*.md   # 期望 exit 0（可选，联网）
+```
 
 ## 变更历史
 
 | 日期 | 变更 |
-| ------ | ------ |
-| 2026-10-26 (v5) | 删除无执行者的契约层:3 个 `assets/schema/*.json`、`scripts/check_data_consistency.py`(143 行)、`.lycheecrc.json`;本文件按"本仓无 CI"重写,去掉 5 个不存在 workflow 的描述 |
-| 2026-06-11 (v4.1.0) | 新增 blog.yml + schema + 校验；dependabot-auto-merge fetch-metadata 升级到 v3.1.0 (SHA 锁定) |
-| 2026-06-11 (v4.0.0) | 关闭 6 个跟踪 issue: L3 SHA 锁定 + 5 个 P2/P3 |
-| 2026-06-11 (v3) | 弃用 vercel.app / 迁移 streak & view / 自托管 OrangePi SVG / 加 schema 校验 / 加 auto-merge / 加 CODEOWNERS & FUNDING & CoC |
-| 2026-06-11 (v2) | 补 P0/P1: monitor-stats / data-check / dependabot / aria-hidden / 个人 slogan |
-| 2026-06-11 (v1) | 初版: 全量审查后建立工程化基础 (LICENSE / SECURITY / 模板 / CI) |
+| --- | --- |
+| 2026-10-29 (v6) | 深度重做：README 改为"声称→可指证据"结构；删除 `data/`（无消费方的第二次复发）与 `assets/badges/`（含伪造统计卡）；新增 `scripts/check.sh` 与 `docs/THIRD_PARTY.md`；按实测修正 demolab / mailto / aria-hidden / 分支保护等失真描述；补 L1–L3 泄露限制记录 |
+| 2026-10-26 (v5) | 删除无执行者的契约层（schema、校验脚本、`.lycheecrc`），按"本仓无 CI"重写 |
+| 2026-06-11 (v2–v4) | 徽章源迁移、自托管 SVG、CODEOWNERS / FUNDING / CoC、blog.yml 与 schema 引入 |
