@@ -1,4 +1,5 @@
 # CODEOWNERS
 # 任何文件变更默认要求 @xfengyin review
-# 后续可按目录细分 (例如: data/ 变更需产品 review, .github/ 变更需 SRE review)
+# 若将来出现第二个维护者，再按目录细分；本仓为单人维护，且实测分支保护未要求 review，
+# 因此该文件目前只有声明意义，没有强制力（见 docs/ARCHITECTURE.md L4）。
 * @xfengyin

@@ -1,6 +1,6 @@
 ---
 name: Content Update
-about: 更新 data/projects.yml 或 data/tech_stack.yml 中的精选项目 / 技术栈
+about: README.md 的文案、项目链接或证据指针需要修改
 title: "[CONTENT] "
 labels: ["documentation"]
 assignees: []
@@ -8,20 +8,20 @@ assignees: []
 
 ## 类型
 
-- [ ] 新增项目
-- [ ] 更新项目描述 / 链接
-- [ ] 调整技术栈
+- [ ] 新增 / 调整项目条目
+- [ ] 修正能力声称或证据链接
+- [ ] 外部引用面变化（需同步 `docs/THIRD_PARTY.md`）
 
 ## 变更内容
 
 <!-- 描述具体改动 -->
 
-## 关联
+## 证据
 
-<!-- 关联的 issue 或 PR -->
+<!-- 每条新声称指向 repo@branch:path；请注明分支（kongming-agent / Protocol-algorithm 是 master） -->
 
 ## 自检
 
-- [ ] 已更新 `data/projects.yml` 或 `data/tech_stack.yml`
-- [ ] README.md 中对应章节已同步
-- [ ] 链接已验证可访问
+- [ ] `bash scripts/check.sh` 通过（FAIL=0 ERROR=0）
+- [ ] 未新增外部图片 / 徽章 / 计数器
+- [ ] 未新增无人引用的数据文件或资产
