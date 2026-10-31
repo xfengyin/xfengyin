@@ -18,6 +18,9 @@ build/
 *.pem
 *.key
 
+# 本地私有名清单：内容不进仓库，见 scripts/private-names.example.txt
+scripts/private-names.txt
+
 # Python cache
 __pycache__/
 *.pyc

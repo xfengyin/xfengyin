@@ -26,7 +26,8 @@ xfengyin/
 │   ├── ARCHITECTURE.md        # 本文件
 │   └── THIRD_PARTY.md         # 外部依赖与网络面清单（含核验日期）
 ├── scripts/
-│   └── check.sh               # 唯一门禁：内容一致性 + 零泄露
+│   ├── check.sh               # 唯一门禁：内容一致性 + 零泄露
+│   └── private-names.example.txt  # 私有名清单的**格式示例**（真实清单在仓库外，见下）
 ├── .markdownlint.json
 ├── CODE_OF_CONDUCT.md
 ├── LICENSE
@@ -65,6 +66,11 @@ xfengyin/
 1. 每类检查都报告 target 数量；`checked == 0` 一律 `SELF-ERROR exit 2`（站点侧 `content-drift-check.py` 曾对空目标报"无漂移 exit 0"，属假绿，不接受同款设计）。
 2. 网络失败 / 限流记 **ERROR** 并 `exit 2`：测不出来不等于通过。
 3. 只用 `curl / grep / sed / awk`，不引入包管理，因此不存在 lockfile 缺失与 `npx` 现拉未固定版本包的供应链面。
+4. **私有仓名清单不进仓库**。本仓是公开的：把私有仓名写进公开脚本，等于用"防泄露门禁"本身制造一次泄露。
+   清单从 `$PROFILE_DENY_FILE` 或 `~/.config/xfengyin/private-names.txt` 读取（格式见
+   `scripts/private-names.example.txt`）；**读不到时门禁 fail-closed（SELF-ERROR exit 2），不给假绿**。
+   匹配用 PCRE 精确边界（`\Q..\E` + 负向前瞻）：清单里的 `foo` 不会误伤公开仓 `foo-overlay`。
+   命中时日志只报"清单第 N 条"，**不回显名字**——否则门禁自己就成了泄露通道。
 
 ## 已知限制（故意记录，不等于已修复）
 
@@ -88,6 +94,7 @@ npx --yes markdownlint-cli@0.42.0 README.md docs/*.md   # 期望 exit 0（可选
 
 | 日期 | 变更 |
 | --- | --- |
+| 2026-10-29 (v6.1) | 修复 v6 自身引入的泄露：`check.sh` 曾把 6 个私有仓名写死在脚本里（提交进公开仓即为新泄露面）。改为从仓库外清单读取 + fail-closed + 命中不回显名字 |
 | 2026-10-29 (v6) | 深度重做：README 改为"声称→可指证据"结构；删除 `data/`（无消费方的第二次复发）与 `assets/badges/`（含伪造统计卡）；新增 `scripts/check.sh` 与 `docs/THIRD_PARTY.md`；按实测修正 demolab / mailto / aria-hidden / 分支保护等失真描述；补 L1–L3 泄露限制记录 |
 | 2026-10-26 (v5) | 删除无执行者的契约层（schema、校验脚本、`.lycheecrc`），按"本仓无 CI"重写 |
 | 2026-06-11 (v2–v4) | 徽章源迁移、自托管 SVG、CODEOWNERS / FUNDING / CoC、blog.yml 与 schema 引入 |

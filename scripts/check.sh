@@ -32,6 +32,16 @@ api_code() {
 }
 if [ ! -f "$README" ]; then echo "SELF-ERROR: 找不到 $README"; exit 2; fi
 
+# 私有仓名清单：**不在仓库内**。仓库是公开的，把私有仓名写进脚本本身就是一次新的泄露。
+# 来源优先级：$PROFILE_DENY_FILE > ~/.config/xfengyin/private-names.txt
+# 格式：每行一个名字。匹配用 PCRE 精确边界（\Q..\E + 负向前瞻），公开的 -overlay 不被同前缀私有名误伤。
+DENY_FILE="${PROFILE_DENY_FILE:-$HOME/.config/xfengyin/private-names.txt}"
+DENY_NAMES=""
+if [ -f "$DENY_FILE" ]; then
+  DENY_NAMES=$(grep -vE "^[[:space:]]*(#|$)" "$DENY_FILE" | tr -d "\r")
+else
+  bad "SELF-ERROR: 私有名清单未配置 ($DENY_FILE)，第 5/10 项无法执行；见 scripts/private-names.example.txt"; selferr=1
+fi
 # 1 仓库链接可达
 REPOS=$(grep -oE "github.com/$OWNER/[A-Za-z0-9._-]+" "$README" | sed "s|github.com/$OWNER/||" | sort -u)
 n=0
@@ -97,12 +107,12 @@ done
 [ "$f" -eq 0 ] && ok "4 禁止形态: 0 命中"
 
 # 5 私有仓名泄露（精确边界匹配，公开的 -overlay 不误报）
-DENY="picoclaw-opi-zero3 orangepi-debug-tool MaaAutoNaruto zhihu-salt-novel-downloader LenovoTool2_V1.0 gemini-web2api-fpk"
+DENY="$DENY_NAMES"
 leak=0
 for p in $DENY; do
-  if grep -qE -- "$p([^-A-Za-z0-9._]|$)" "$README"; then bad "私有仓名泄露: $p"; leak=$((leak+1)); fi
+  if grep -qP -- "\Q$p\E(?![A-Za-z0-9._-])" "$README"; then bad "私有仓名泄露: 清单第 $((leak+1)) 条命中 README（不打印名字）"; leak=$((leak+1)); fi
 done
-[ "$leak" -eq 0 ] && ok "5 私有名: 0 命中 (边界匹配)"
+[ "$leak" -eq 0 ] && [ -n "$DENY_NAMES" ] && ok "5 私有名: 0 命中 (边界匹配)"
 
 # 6 联系信道：出现 mailto 就必须有 MX（github.io 子域无 MX，已复现静默丢信）
 MAILRAW=$(grep -oE "mailto:[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+" "$README" | sed "s|^mailto:||" | sort -u)
@@ -155,10 +165,9 @@ if [ "$imgs" -eq 0 ]; then ok "9 外部图片请求 = 0"; else bad "外部图片
 # 10 零泄露门禁（内容面 + 暂存区新增行）：私有仓名 / 内网形态 / 个人邮箱 / 凭据形态
 # 注：本脚本自身携带 denylist 模式，因此扫描范围排除 scripts/（否则必然自命中）。
 CONTENT=$(ls "$README" 2>/dev/null; ls "$REPO_DIR"/docs/*.md 2>/dev/null; ls "$REPO_DIR"/.github/*.md "$REPO_DIR"/.github/*.yml 2>/dev/null; ls "$REPO_DIR"/.github/ISSUE_TEMPLATE/*.md 2>/dev/null)
-PAT_PRIVATE="picoclaw-opi-zero3([^-A-Za-z0-9._]|$)|orange"pi"-debug-tool|MaaAutoNaruto|zhihu-salt-novel-downloader|LenovoTool2_V1[._]0|web2api-fpk|tier-gitea|tier-github"
 PAT_INTERNAL="192[.]168[.]|10[.][0-9]+[.][0-9]+[.]|172[.](1[6-9]|2[0-9]|3[0-1])[.]|:(3100|3101)|gitea[.][A-Za-z0-9.-]*[:/]"
 PAT_PERSONAL="[0-9]{8,}@(qq|163|126|foxmail)[.]com"
-PAT_CRED="ghp_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|BEGIN (RSA |OPENSSH |EC |)PRIVATE KEY"
+PAT_CRED="gh""p_[A-Za-z0-9]{20,}|github_""pat_[A-Za-z0-9_]{20,}|BEGIN (RSA |OPENSSH |EC |)PRIVATE KEY"
 lc=0; lfail=0
 STAGED=""
 if git -C "$REPO_DIR" rev-parse --git-dir > /dev/null 2>&1; then
@@ -168,18 +177,24 @@ for f in $CONTENT; do
   [ -f "$f" ] || continue
   case "$f" in *check.sh) continue ;; esac
   lc=$((lc+1))
-  for pat in "$PAT_PRIVATE" "$PAT_INTERNAL" "$PAT_PERSONAL" "$PAT_CRED"; do
+  for pat in "$PAT_INTERNAL" "$PAT_PERSONAL" "$PAT_CRED"; do
     if grep -qE -- "$pat" "$f"; then bad "泄露门禁命中: $f <- $(echo "$pat" | cut -c1-22)..."; lfail=$((lfail+1)); fi
+  done
+  for n in $DENY_NAMES; do
+    if grep -qP -- "\Q$n\E(?![A-Za-z0-9._-])" "$f"; then bad "泄露门禁命中: $f <- 私有名清单条目（不打印名字）"; lfail=$((lfail+1)); fi
   done
 done
 if [ -n "$STAGED" ]; then
   lc=$((lc+1))
-  for pat in "$PAT_PRIVATE" "$PAT_INTERNAL" "$PAT_PERSONAL" "$PAT_CRED"; do
+  for pat in "$PAT_INTERNAL" "$PAT_PERSONAL" "$PAT_CRED"; do
     if echo "$STAGED" | grep -qE -- "$pat"; then bad "泄露门禁命中: 暂存区新增行 <- $(echo "$pat" | cut -c1-22)..."; lfail=$((lfail+1)); fi
+  done
+  for n in $DENY_NAMES; do
+    if echo "$STAGED" | grep -qP -- "\Q$n\E(?![A-Za-z0-9._-])"; then bad "泄露门禁命中: 暂存区新增行 <- 私有名清单条目（不打印名字）"; lfail=$((lfail+1)); fi
   done
 fi
 if [ "$lc" -eq 0 ]; then bad "SELF-ERROR: 泄露门禁没有可扫描文件"; selferr=1; fi
-if [ "$lfail" -eq 0 ]; then ok "10 泄露门禁: 扫描 $lc 个内容面(含暂存区), 0 命中"; fi
+if [ "$lfail" -eq 0 ] && [ -n "$DENY_NAMES" ]; then ok "10 泄露门禁: 扫描 $lc 个内容面(含暂存区), 0 命中"; fi
 
 echo "── check.sh ── $README"
 cat "$LOG"
