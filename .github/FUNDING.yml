@@ -1,4 +1,7 @@
 # Funding
-# 在 GitHub 仓库页启用 "Sponsor" 按钮
-# 当前已启用 GitHub Sponsors (指向 @xfengyin)
+# 在 GitHub 仓库页声明 Sponsor 按钮
+# 注意：2026-10-29 实测 GitHub Sponsors 尚未开通（
+#   api.github.com/users/xfengyin/sponsors_pricing → 404，
+#   github.com/sponsors/xfengyin → 302 回落到个人主页）。
+# 保留本文件作为将来开通时的占位；开通前它不会产生 Sponsor 按钮。
 github: [xfengyin]

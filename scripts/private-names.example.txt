@@ -1,0 +1,14 @@
+# 私有仓名清单（示例文件）
+#
+# 复制到 ~/.config/xfengyin/private-names.txt，或让 check.sh 通过环境变量读取：
+#   PROFILE_DENY_FILE=/path/to/private-names.txt bash scripts/check.sh
+#
+# 为什么不在仓库里：本仓是公开的。把私有仓名写进公开脚本，等于用"防泄露门禁"
+# 本身制造一次泄露——评审里 AppSec 指出的正是这一类。
+#
+# 格式：每行一个名字，`#` 开头为注释。匹配是精确边界的：
+#   清单里的 `foo` 不会误伤公开仓 `foo-overlay`。
+#
+# 下面只是占位示例，不是真实名字：
+# my-private-repo
+# another-private-project
