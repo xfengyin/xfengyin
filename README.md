@@ -39,6 +39,15 @@ Every claim below links to code, so you can check it rather than trust it.
 **Built.** 21 added files and exactly two one-line hooks on base commit `49183d7`: status-LED language, thermal watchdog, an `opi-info` diagnostic binary, systemd units ([README](https://github.com/xfengyin/picoclaw-opi-zero3-overlay#the-two-hooks)). The board package builds and tests green on an unmodified upstream tree, build tags and `CGO_ENABLED=0`.
 **Trade-off.** Staying additive caps what the overlay may change, in exchange for rebase-ability.
 
+## Notes (zh-CN)
+
+Longer write-ups live on [xfengyin.github.io](https://xfengyin.github.io). The hardware ones back the Edge row above:
+
+- [Battery pack test on a budget](https://xfengyin.github.io/posts/hardware-test-battery/) — what a $40 load rig can and cannot tell you
+- [Sensor calibration notes](https://xfengyin.github.io/posts/sensor-calibration/) — offset/gain discipline before trusting any ADC channel
+- [Oscilloscope ground rules](https://xfengyin.github.io/posts/oscilloscope-guide/) — the probes-and-grounding mistakes that invent phantom signals
+
+Design-draft posts on the site are marked with editor notes where the described system never shipped.
 ## Also public
 
 - [Protocol-algorithm](https://github.com/xfengyin/Protocol-algorithm) — WSN / LEACH simulation, registry-dispatched protocols, AI cluster-head selection, benchmark harness (Python).
